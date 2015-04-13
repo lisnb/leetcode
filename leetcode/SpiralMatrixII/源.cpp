@@ -28,22 +28,19 @@ private:
         {
             matrix.at(row).at(i) = start++;
         }
-        //--start;
         for (auto i = row+1; i < row + n; ++i)
         {
             matrix.at(i).at(row + n - 1) = start++;
         }
-        //--start;
         for (auto i = row + n - 2; i >= row; --i)
         {
             matrix.at(row + n - 1).at(i) = start++;
         }
-        //--start;
         for (auto i = row + n - 2; i > row; --i)
         {
             matrix.at(i).at(row) = start++;
         }
-        return start;//--start;
+        return start;
     }
 };
 
