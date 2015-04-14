@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -47,8 +48,8 @@ public:
 int main()
 {
     Solution s;
-
-    vector<vector<char>> test = {
-        {}
-    }
+    vector<unordered_set<int>> tests(10, unordered_set<int>());
+    tests.at(0).insert(1);
+    cout << (tests.at(2).find(1)==tests.at(2).end()) << endl;
+    system("pause");
 }
