@@ -49,11 +49,11 @@ int main()
 {
     Solution s;
 
-    //vector<int> t1 = { 1, 4, 6, 7, 9, 17 }, t2 = { 2, 3, 5, 8, 11, 14 };
+    vector<int> t1 = { 1}, t2 = { 2, 3, 5, 8, 11, 14 };
     //for (auto i = 1; i < t1.size() + t2.size() ;++i)
-        //cout << s.findKthElement(t1, 0, t2, 0, 12) << endl;
-    vector<int> t1, t2 = { 1 };
-    cout << s.findMedianSortedArrays(t2, t1) << endl;
+    cout << s.findKthElement(t1, 0, t2, 0, 4) << endl;
+    //vector<int> t1, t2 = { 1 };
+    //cout << s.findMedianSortedArrays(t2, t1) << endl;
     system("pause");
     return 0;
 }
