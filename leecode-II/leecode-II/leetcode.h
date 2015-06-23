@@ -51,8 +51,6 @@ _leetcode_listnode<T> *lc_createlist(vector<T> &vals, bool print=false)
 }
 
 
-
-
 template<typename T>
 void lc_destroylist(_leetcode_listnode<T> *head)
 {
@@ -64,6 +62,13 @@ void lc_destroylist(_leetcode_listnode<T> *head)
         head = tmp;
     }
 }
+
+template<typename T>
+struct _leetcode_randomlistnode{
+    T label;
+    _leetcode_randomlistnode *next, *random;
+    _leetcode_randomlistnode(T x) :label(x), next(nullptr), random(nullptr){};
+};
 
 
 #endif
