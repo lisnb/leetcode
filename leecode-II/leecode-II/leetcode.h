@@ -1,5 +1,5 @@
-#ifndef LEETCODE_H_
-#define LEETCODE_H_
+#ifndef __LEETCODE_H_
+#define __LEETCODE_H_
 
 #include <algorithm>
 #include <string>
