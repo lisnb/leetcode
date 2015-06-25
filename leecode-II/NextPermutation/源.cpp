@@ -17,13 +17,8 @@ public:
             reverse(nums.begin(), nums.end());
             return;
         }
-        int p2(p1 - 1), pivot(p1);
-        while (p1 < nums.size())
-        {
-            if (nums.at(p1) > nums.at(p2) && nums.at(p1) <= nums.at(pivot))
-                pivot = p1;
-            ++p1;
-        }
+        int p2(p1 - 1), pivot(nums.size());
+        while (nums.at(--pivot) <= nums.at(p2));
 
         swap(nums.at(p2), nums.at(pivot));
 
