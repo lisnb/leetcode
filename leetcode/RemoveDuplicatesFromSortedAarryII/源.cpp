@@ -39,5 +39,6 @@ int main()
     Solution s;
     vector<int> A = { 1, 1, 1};
     cout << s.removeDuplicates(A, A.size()) << endl;
-    system("pause");
+    //system("pause");
+    return 0;
 }

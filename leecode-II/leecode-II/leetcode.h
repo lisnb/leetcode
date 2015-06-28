@@ -71,4 +71,12 @@ struct _leetcode_randomlistnode{
 };
 
 
+template<typename T>
+struct _leetcode_interval{
+    T start;
+    T end;
+    _leetcode_interval() :start(T()), end(T()){}
+    _leetcode_interval(T s, T e) :start(s), end(e){}
+};
+
 #endif
