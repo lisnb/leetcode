@@ -29,7 +29,6 @@ private:
     {
         if (n == 1)
             return 1;
-        //int frac = 10;
         int sum(0), tmp(0);
         while (n > 0)
         {
