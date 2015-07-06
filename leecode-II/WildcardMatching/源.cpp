@@ -73,7 +73,7 @@ public:
 
     }
 
-    bool isMatch3(string s, string p)
+    bool isMatchWA3(string s, string p)
     {
         size_t asteristk(0);
         for (auto c : p)
