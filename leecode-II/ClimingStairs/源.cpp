@@ -8,7 +8,22 @@ using namespace std;
 
 class Solution {
 public:
-    int climbStairs(int n) {
+
+    int climbStairs(int n)
+    {
+        if (n <= 1)
+            return 1;
+        int cn_1(1), cn_2(0), cn(0);
+        for (auto i = 0; i < n; ++i)
+        {
+            cn = cn_1 + cn_2;
+            cn_2 = cn_1;
+            cn_1 = cn;
+        }
+        return cn;
+    }
+
+    int climbStairs2(int n) {
         unordered_map<int, int> cache;
         return climb(n, 0, cache);
     }
@@ -34,7 +49,7 @@ int main()
     Solution s;
     
     for (auto i = 0; i < 38; ++i)
-        cout << i << " " << s.climbStairs(i) << endl;
+        cout << i << " " << s.climbStairs(i)<< "  "<< s.climbStairs2(i)<< endl;
     system("pause");
     return 0;
 }
