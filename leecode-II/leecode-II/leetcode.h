@@ -180,4 +180,12 @@ _leetcode_treenode<T> *lc_deserializetree(vector<T> &sequence, T placeholder = T
 }
 
 
+
+template<typename T>
+struct _leetcode_treelinknode{
+    T val;
+    _leetcode_treelinknode *left, *right, *next;
+    _leetcode_treelinknode(T x) :val(x), left(nullptr), right(nullptr), next(nullptr){};
+};
+
 #endif
