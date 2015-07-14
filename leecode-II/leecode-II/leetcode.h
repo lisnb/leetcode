@@ -188,4 +188,12 @@ struct _leetcode_treelinknode{
     _leetcode_treelinknode(T x) :val(x), left(nullptr), right(nullptr), next(nullptr){};
 };
 
+
+template<typename T>
+struct _leetcode_undirectedgraphnode{
+    T label;
+    vector<_leetcode_undirectedgraphnode *> neighbors;
+    _leetcode_undirectedgraphnode(T x) :label(x){};
+};
+
 #endif

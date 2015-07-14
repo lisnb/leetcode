@@ -43,12 +43,11 @@ public:
             temp = q.front();
             q.pop();
             if (edges.find(temp->label) == edges.end())
-
-            for (auto e : temp->neighbors)
-            {
-                //visit(e);
-                q.push(e);
-            }
+                for (auto e : temp->neighbors)
+                {
+                    //visit(e);
+                    q.push(e);
+                }
         }
         return edges[node->label];
     }
