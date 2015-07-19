@@ -9,7 +9,8 @@ using namespace std;
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
-        return search(nums, target, 0, nums.size()-1);
+        //return search2(nums, target, 0, nums.size()-1);
+        return search4(nums, target);
     }
 
 private:
@@ -35,6 +36,60 @@ private:
         }
         else
             return search(nums, target, mid + 1, e);
+    }
+
+
+
+    int search2(const vector<int> &nums, int target, int b, int e)
+    {
+        if (nums.at(b) > target)
+            return b;
+        if (nums.at(e) < target)
+            return e+1;
+        int mid = b + (e - b) / 2;
+        if (nums.at(mid) == target)
+            return mid;
+        else if (nums.at(mid) > target)
+            return search2(nums, target, b, mid - 1);
+        else
+            return search2(nums, target, mid + 1, e);
+    }
+
+    int search3(const vector<int> &nums, int target)
+    {
+        int b(0), e(nums.size() - 1);
+        while (b <= e)
+        {
+            int mid = b + ((e - b) >> 1);
+            if (nums.at(mid) == target)
+                return mid;
+            else if (nums.at(mid) > target)
+                e = mid - 1;
+            else
+                b = mid + 1;
+        }
+        return -1;
+    }
+
+    int search4(const vector<int> &nums, int target)
+    {
+        int b(0), e(nums.size() - 1), mid(0);
+        while (b <= e)
+        {
+            if (target < nums.at(b))
+                return b;
+            if (target>nums.at(e))
+                return e + 1;
+            mid = b + ((e - b) >> 1);
+            if (nums.at(mid) == target)
+                return mid;
+            else if (nums.at(mid) > target)
+                e = mid - 1;
+            else
+                b = mid + 1;
+        }
+        return -1;
+        //return nums.at(mid) > target ? mid : mid + 1;
     }
 
 };
