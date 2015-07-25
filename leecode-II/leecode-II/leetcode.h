@@ -7,7 +7,11 @@
 #include <vector>
 #include <deque>
 
-using namespace std;
+using std::cout;
+using std::deque;
+using std::string;
+using std::endl;
+using std::vector;
 
 template<typename T>
 struct _leetcode_listnode{
@@ -179,6 +183,173 @@ _leetcode_treenode<T> *lc_deserializetree(vector<T> &sequence, T placeholder = T
     return root;
 }
 
+template<typename T>
+void lc_bintree_preorder_r(_leetcode_treenode<T> *root, vector<T> &re)
+{
+    if (root == nullptr)
+        return;
+    re.push_back(root->val);
+    lc_bintree_preorder_r(root->left, re);
+    lc_bintree_preorder_r(root->right, re);
+}
+
+template<typename T>
+void lc_bintree_preorder_r(_leetcode_treenode<T> *root)
+{
+    vector<T> re;
+    lc_bintree_preorder_r(root, re);
+    for (auto &node : re)
+        cout << node << " ";
+    cout << endl;
+}
+
+template<typename T>
+void lc_bintree_preorder_i(_leetcode_treenode<T> *root, vector<T> &re)
+{
+    if (root == nullptr)
+        return;
+    deque<_leetcode_treenode<T> *> stack;
+    stack.push_back(root);
+    while (!stack.empty())
+    {
+        auto t = stack.back();
+        stack.pop_back();
+        re.push_back(t->val);
+        if (t->right != nullptr)
+            stack.push_back(t->right);
+        if (t->left != nullptr)
+            stack.push_back(t->left);
+    }
+}
+
+
+template<typename T>
+void lc_bintree_preorder_i(_leetcode_treenode<T> *root)
+{
+    vector<T> re;
+    lc_bintree_preorder_i(root, re);
+    for (auto &node : re)
+        cout << node << " ";
+    cout << endl;
+}
+
+
+template<typename T>
+void lc_bintree_inorder_r(_leetcode_treenode<T> *root, vector<T> &re)
+{
+    if (root == nullptr)
+        return;
+    lc_bintree_inorder_r(root->left, re);
+    re.push_back(root->val);
+    lc_bintree_inorder_r(root->right, re);
+}
+
+
+template<typename T>
+void lc_bintree_inorder_r(_leetcode_treenode<T> *root)
+{
+    vector<T> re;
+    lc_bintree_inorder_r(root, re);
+    for (auto &node : re)
+        cout << node << " ";
+    cout << endl;
+}
+
+
+template<typename T>
+void lc_bintree_inorder_i(_leetcode_treenode<T> *root, vector<T> &re)
+{
+    deque<_leetcode_treenode<T> *> stack;
+    auto left = root;
+    while (left != nullptr)
+    {
+        stack.push_back(left);
+        left = left->left;
+    }
+    while (!stack.empty())
+    {
+        auto current = stack.back();
+        stack.pop_back();
+        re.push_back(current->val);
+        auto t = current->right;
+        while (t != nullptr)
+        {
+            stack.push_back(t);
+            t = t->left;
+        }
+    }
+}
+
+
+template<typename T>
+void lc_bintree_inorder_i(_leetcode_treenode<T> *root)
+{
+    vector<T> re;
+    lc_bintree_inorder_i(root, re);
+    for (auto &node : re)
+        cout << node << " ";
+    cout << endl;
+}
+
+
+template<typename T>
+void lc_bintree_postorder_r(_leetcode_treenode<T> *root, vector<T> &re)
+{
+    if (root == nullptr)
+        return;
+    lc_bintree_postorder_r(root->left, re);
+    lc_bintree_postorder_r(root->right, re);
+    re.push_back(root->val);
+}
+
+
+template<typename T>
+void lc_bintree_postorder_r(_leetcode_treenode<T> *root)
+{
+    vector<T> re;
+    lc_bintree_postorder_r(root, re);
+    for (auto &node : re)
+        cout << node << " ";
+    cout << endl;
+}
+
+
+template<typename T>
+void lc_bintree_postorder_i(_leetcode_treenode<T> *root, vector<T> &re)
+{
+    if (root == nullptr)
+        return;
+    deque<pair<_leetcode_treenode<T> *, bool>> stack;
+    stack.push_back(make_pair(root, true));
+    while (!stack.empty())
+    {
+        auto &current = stack.back();
+        if (current.second)
+        {
+            if (current.first->right != nullptr)
+                stack.push_back(make_pair(current.first->right, true));
+            if (current.first->left != nullptr)
+                stack.push_back(make_pair(current.first->left, true));
+            current.second = false;
+        }
+        else
+        {
+            re.push_back(current.first->val);
+            stack.pop_back();
+        }
+    }
+}
+
+
+template<typename T>
+void lc_bintree_postorder_i(_leetcode_treenode<T> *root)
+{
+    vector<T> re;
+    lc_bintree_postorder_i(root, re);
+    for (auto &node : re)
+        cout << node << " ";
+    cout << endl;
+}
 
 
 template<typename T>
