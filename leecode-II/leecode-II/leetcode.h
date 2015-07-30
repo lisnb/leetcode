@@ -353,6 +353,31 @@ void lc_bintree_postorder_i(_leetcode_treenode<T> *root)
 
 
 template<typename T>
+_leetcode_treenode<T> *lc_leftmostchild(_leetcode_treenode<T> *cur)
+{
+    if (cur == nullptr)
+        return nullptr;
+    auto t(cur);
+    while (t != nullptr)
+        t = t->left;
+    return t;
+}
+
+/*
+template<typename T>
+_leetcode_treenode<T> *lc_inordernext(_leetcode_treenode<T> *cur)
+{
+    if (cur == nullptr)
+        return cur;
+    if (cur->right != nullptr)
+        return lc_leftmostchild(cur->right);
+    auto t(cur);
+    auto parent(t->)
+}
+*/
+
+
+template<typename T>
 struct _leetcode_treelinknode{
     T val;
     _leetcode_treelinknode *left, *right, *next;
