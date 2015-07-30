@@ -26,7 +26,7 @@ public:
                     {
                         ispal.at(j).at(i) = 0;
                         if (j == 1)
-                            dp.at(i) = 0;
+                            dp.at(i) = 0;//when ispal.at(1, i) is true
                         else
                             dp.at(i) = min(dp.at(i), dp.at(j - 1) + 1);
                     }
