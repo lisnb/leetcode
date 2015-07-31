@@ -17,6 +17,22 @@ public:
         return re;
     }
 private:
+
+    void subset(const vector<int> &nums, vector<vector<int>> &re)
+    {
+        re.reserve(1 << nums.size());
+        re.push_back({});
+        for (auto num : nums)
+        {
+            int csize = re.size();
+            copy(re.begin(), re.begin() + csize, back_inserter(re));
+            for (auto i = csize; i < re.size(); ++i)
+            {
+                re.at(i).push_back(num);
+            }
+        }
+    }
+
     void subset(const vector<int> &nums, int ci, vector<int> &prefix, vector<vector<int>> &re)
     {
         

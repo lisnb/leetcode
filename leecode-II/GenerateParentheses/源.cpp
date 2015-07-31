@@ -23,8 +23,7 @@ private:
             return;
         if (lc + rc == n)
         {
-            //if (lc==rc)
-                re.push_back(prefix);
+            re.push_back(prefix);
             return;
         }
         prefix.push_back('(');
