@@ -124,6 +124,34 @@ double getmedian()
 }
 
 
+int ctci9_8_makechange(int n, int currency=25)
+{
+    int next_currency = 0;
+    switch (currency)
+    {
+    case 25:
+        next_currency = 10;
+        break;
+    case 10:
+        next_currency = 5;
+        break;
+    case 5:
+        next_currency = 1;
+        break;
+    default:
+        return 1;
+    }
+
+    int ways = 0;
+    for (int cnt = 0; cnt*currency < cnt; ++cnt)
+    {
+        ways += ctci9_8_makechange(n - cnt*currency, next_currency);
+    }
+    return ways;
+}
+
+
+
 
 int main()
 {
