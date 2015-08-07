@@ -15,7 +15,7 @@ public:
         vector<vector<int>> re;
         if (root == nullptr)
             return re;
-        path2(root, sum, prefix, re);
+        path(root, sum, prefix, re);
         return re;
     }
 private:
@@ -62,7 +62,7 @@ int main()
     Solution s;
     vector<int> test = { 5, 4, 8, 11, -1, 13, 4, 7, 2, -1, -1, 5, 1 };
     auto root = lc_deserializetree(test, -1);
-    auto re = s.pathSum(root, 22);
+    auto re = s.pathSum(root, 5);
     system("pause");
     return 0;
 }

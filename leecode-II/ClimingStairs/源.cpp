@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
+#include <numeric>
 
 using namespace std;
 
@@ -28,6 +29,17 @@ public:
         return climb(n, 0, cache);
     }
 
+
+    int jumpFloorII(int number)
+    {
+        vector<int> ways(number, 1);
+        for (int i = 0; i < number; ++i)
+        {
+            ways.at(i) = accumulate(ways.begin(), ways.begin() + i+1, 0);
+        }
+        return ways.back();
+    }
+
 private:
     int climb(int n, int cn, unordered_map<int, int> &cache)
     {
@@ -41,6 +53,9 @@ private:
         cache[cn] = tmp;
         return tmp;
     }
+
+
+
 };
 
 
@@ -48,8 +63,9 @@ int main()
 {
     Solution s;
     
-    for (auto i = 0; i < 38; ++i)
-        cout << i << " " << s.climbStairs(i)<< "  "<< s.climbStairs2(i)<< endl;
+    for (auto i = 1; i < 38; ++i)
+        //cout << i << " " << s.climbStairs(i)<< "  "<< s.climbStairs2(i)<< endl;
+        cout << i << " " << s.jumpFloorII(i) << endl;
     system("pause");
     return 0;
 }

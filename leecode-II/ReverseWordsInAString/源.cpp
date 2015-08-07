@@ -9,6 +9,30 @@ using namespace std;
 
 class Solution {
 public:
+public:
+    string ReverseSentence(string str) {
+        if (str.empty())
+            return "";
+        stringstream ss;
+        int p1(str.size() - 1), p2(-1);
+        while (p1 >= 0)
+        {
+            while (p1 >= 0 && str.at(p1) == ' ')
+                --p1;
+            if (p1 == -1)
+                break;
+            p2 = p1;
+            while (p1 >= 0 && str.at(p1) != ' ')
+                --p1;
+            ss << str.substr(p1 + 1, p2 - p1) << ' ';
+        }
+        string s = ss.str();
+        if (p2 >= 0)
+            s.pop_back();
+        else
+            return str;
+        return s;
+    }
     void reverseWords(string &s) {
         istringstream ss(s);
         vector<string> segs;
@@ -87,7 +111,8 @@ int main()
     for (auto t : test)
     {
         cout << t << "|";
-        s.reverseWords3(t);
+        //s.reverseWords3(t);
+        cout<<s.ReverseSentence(t) << endl;
         cout << t << "|"<<endl;
     }
     system("pause");
