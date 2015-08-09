@@ -51,6 +51,46 @@ public:
 };
 
 
+
+class Solution2 {
+public:
+    RandomListNode* Clone(RandomListNode* pHead)
+    {
+        if (pHead == nullptr)
+            return nullptr;
+        auto thead(pHead);
+        while (thead != nullptr)
+        {
+            auto t = new RandomListNode(thead->label);
+            t->next = thead->next;
+            thead->next = t;
+            thead = t->next;
+        }
+
+        thead = pHead;
+        while (thead != nullptr)
+        {
+            if (thead->random!=nullptr)
+                thead->next->random = thead->random->next;
+            thead = thead->next->next;
+        }
+
+        auto newhead = new RandomListNode(0);
+        auto p1(pHead), p2(newhead);
+        while (p1 != nullptr)
+        {
+            p2->next = p1->next;
+            p2 = p2->next;
+            p1->next = p2->next;
+            p1 = p1->next;
+        }
+        p2->next = nullptr;
+        return newhead->next;
+
+    }
+};
+
+
 int main()
 {
     Solution s;

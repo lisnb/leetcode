@@ -28,13 +28,47 @@ public:
     }
 };
 
+class Solution2 {
+public:
+    ListNode* deleteDuplication(ListNode* pHead)
+    {
+        if (pHead == nullptr || pHead->next == nullptr)
+            return pHead;
+        ListNode *newhead = new ListNode(0);
+        newhead->next = pHead;
+        ListNode *p1(newhead), *p2(pHead->next);
+        int cur(pHead->val), cnt(1);
+        while (true)
+        {
+            while (p2 != nullptr&&p2->val == cur)
+            {
+                ++cnt;
+                p2 = p2->next;
+            }
+            if (cnt == 1)
+            {
+                p1->next->val = cur;
+                p1 = p1->next;
+            }
+            if (p2 == nullptr)
+                break;
+            cur = p2->val;
+            cnt = 1;
+            p2 = p2->next;
+        }
+        p1->next = nullptr;
+        return newhead->next;
+    }
+};
+
 
 int main()
 {
-    Solution s;
-    vector<int> test = { 1, 1, 2, 3, 3, 3, 4 };
+    Solution2 s;
+    vector<int> test = { 1, 2, 34 };
     auto l1 = lc_createlist(test, true);
-    auto l2 = s.deleteDuplicates(l1);
+    //auto l2 = s.deleteDuplicates(l1);
+    auto l2 = s.deleteDuplication(l1);
     lc_printlist(l2);
     system("pause");
     return 0;

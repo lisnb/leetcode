@@ -80,13 +80,66 @@ private:
     }
 };
 
+class Solution2 {
+public:
+    TreeNode* KthNode(TreeNode* pRoot, unsigned int k)
+    {
+        int ck = 0;
+        TreeNode *target(nullptr);
+        kthsmallest(pRoot, k, ck, target);
+        return target;
+    }
+
+private:
+    void kthsmallest(TreeNode *root, int k, int &ck, TreeNode *&target)
+    {
+        if (ck>k)
+            return;
+        if (root == nullptr)
+            return;
+        kthsmallest(root->left, k, ck, target);
+        ++ck;
+        if (ck == k)
+        {
+            target = root;
+            return;
+        }
+        kthsmallest(root->right, k, ck, target);
+    }
+    void kthlargest(TreeNode *root, int k, int &ck, TreeNode *&target)
+    {
+        if (root == nullptr)
+            return;
+        kthlargest(root->right, k, ck, target);
+        if (target != nullptr)
+            return;
+        if (ck == k)
+        {
+            target = root;
+            return;
+        }
+        ++ck;
+        
+        kthlargest(root->left, k, ck, target);
+
+    }
+
+};
+
+
+
 int main()
 {
-    Solution s;
-    vector<int> test = { 10, 5, -1, 2, 7, 1, 3, 6, 8, 0, -1, -1, -1, -1, -1,-1,9 };
+    Solution2 s;
+    vector<int> test = { 8, 6, 10, 5, 7, 9, 11 };
     auto root = lc_deserializetree(test, -1);
-    for (auto i = 1; i < 10; ++i)
-        cout << s.kthSmallest(root, i) << endl;
+    for (auto i = 0; i < 20; ++i)
+    {
+        auto re = s.KthNode(root, i);
+        cout << (re == nullptr ? -1: re->val)<<endl;
+    }
+        //cout << s.kthSmallest(root, i) << endl;
+        //cout << s.KthNode(root, i)->val << endl;
     system("pause");
     return 0;
 }

@@ -2,6 +2,8 @@
 #include <deque>
 #include <vector>
 #include <iostream>
+#include <queue>
+
 using namespace std;
 
 
@@ -35,11 +37,43 @@ public:
     }
 };
 
+class Solution2 {
+public:
+    vector<int> maxInWindows(const vector<int>& num, unsigned int size)
+    {
+        if (num.empty() || size == 0)
+            return{};
+        if (num.size() <= size)
+            return{ *max_element(num.begin(), num.end()) };
+        deque<int> mindex;
+        for (auto i = 0; i + 1<size; ++i)
+        {
+            while (!mindex.empty() && num.at(mindex.back()) <= num.at(i))
+                mindex.pop_back();
+            mindex.push_back(i);
+        }
+
+        vector<int> re;
+        for (auto i = size - 1; i<num.size(); ++i)
+        {
+            while (!mindex.empty() && mindex.front() + size <= i)
+                mindex.pop_front();
+            while (!mindex.empty() && num.at(mindex.back()) <= num.at(i))
+                mindex.pop_back();
+            mindex.push_back(i);
+            re.push_back(num.at(mindex.front()));
+        }
+        return re;
+
+    }
+};
+
 int main()
 {
-    Solution s;
+    Solution2 s;
     vector<int> test = { 1, 3, -1, -3, 5, 3, 6, 7 };
-    auto re = s.maxSlidingWindow(test, 1);
+    //auto re = s.maxSlidingWindow(test, 1);
+    auto re = s.maxInWindows(test, 3);
     for (auto r : re)
         cout << r << endl;
     system("pause");
