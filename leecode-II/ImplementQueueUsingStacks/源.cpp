@@ -5,6 +5,48 @@
 using namespace std;
 
 
+class Queue2{
+private:
+    stack<int> stack1;
+    stack<int> stack2;
+public:
+    void _move()
+    {
+        while (!stack1.empty())
+        {
+            stack2.push(stack1.top());
+            stack1.pop();
+        }
+    }
+    
+    void push(int x)
+    {
+        stack1.push(x);
+    }
+
+    void pop(void)
+    {
+        if (stack2.empty())
+            _move();
+        if (stack2.empty())
+            return;
+        else
+            stack2.pop();
+    }
+    int peek(void)
+    {
+        if (stack2.empty())
+            _move();
+        if (stack2.empty())
+            return -1;
+        return stack2.top();
+    }
+
+    bool empty(void)
+    {
+        return stack1.empty() && stack2.empty();
+    }
+};
 
 
 class Queue {
