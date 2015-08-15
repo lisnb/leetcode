@@ -22,7 +22,8 @@ public:
                 if (grid.at(i).at(j) == '1')
                 {
                     ++cnt;
-                    flip(grid, i, j, row, column, cache);
+                    grid.at(i).at(j) = '.';
+                    flip(grid, i, j, row, column);
                 }
             }
         }
@@ -31,6 +32,34 @@ public:
 
 
 private:
+    void addcell(vector<vector<char>> &grid, int r, int c, int row, int column, deque<pair<int, int>> &queue)
+    {
+        if (r < row && r >= 0 && c < column && c >= 0 && grid.at(r).at(c) == '1')
+        {
+            grid.at(r).at(c) = '.';
+            queue.push_back(make_pair(r, c));
+        }
+    }
+
+    void flip(vector<vector<char>> &grid, int r, int c, int row, int column)
+    {
+        deque<pair<int, int>> queue;
+        queue.push_back(make_pair(r, c));
+        pair<int, int> cur;
+        while (!queue.empty())
+        {
+            cur = queue.front();
+            queue.pop_front();
+            r = cur.first;
+            c = cur.second;
+            addcell(grid, r + 1, c, row, column, queue);
+            addcell(grid, r - 1, c, row, column, queue);
+            addcell(grid, r, c + 1, row, column, queue);
+            addcell(grid, r, c - 1, row, column, queue);
+        }
+    }
+
+
     void flip(vector<vector<char>> &grid, int r, int c, int row, int column, unordered_set<int> &cache)
     {
         deque<pair<int, int>> queue;
@@ -101,7 +130,12 @@ int main()
         { '1', '0', '1', '0', '1' },
         { '1', '1', '1', '0', '1' },
     };
-    cout << s.numIslands(test2) << endl;
+    vector<vector<char>> test3 = {
+        { '1', '1', '1' },
+        { '0', '1', '0' },
+        { '1', '1', '1' }
+    };
+    cout << s.numIslands(test3) << endl;
     system("pause");
     return 0;
 }

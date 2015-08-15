@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <string>
 #include <iostream>
+#include <limits>
 #include <vector>
 
 using namespace std;
@@ -8,7 +9,105 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
+    vector<vector<int>> twosum(vector<int> &nums, int target)
+    {
+        vector<vector<int>> re;
+        if (nums.size() < 2)
+            return re;
+        int b(0), e(nums.size() - 1);
+        while (b < e)
+        {
+            int t = nums[b] + nums[e];
+            if (t == target)
+                re.push_back({ nums[b++], nums[e--] });
+            else if (t < target)
+                ++b;
+            else
+                --e;
+        }
+        return re;
+    }
+    
+    vector<vector<int>> twosum2(vector<int> &nums, int target)
+    {
+        vector<vector<int>> re;
+        if (nums.size() < 2)
+            return re;
+        for (int i = 0; i + 1 < nums.size(); ++i)
+        {
+            for (int j = i + 1; j < nums.size(); ++j)
+            {
+                if (nums[i] + nums[j] == target)
+                    re.push_back({ nums[i], nums[j] });
+            }
+        }
+        return re;
+    }
+
+    vector<vector<int>> threeSum(vector<int> &nums)
+    {
+        return threesum(nums, 0);
+
+    }
+
+    vector<vector<int>> threesum2(vector<int> &nums, int target)
+    {
+        vector<vector<int>> re;
+        if (nums.size() < 3)
+            return re;
+        for (int i = 0; i + 2 < nums.size(); ++i)
+        {
+            for (int j = i + 1; j + 1 < nums.size(); ++j)
+            {
+                for (int k = j + 1; k < nums.size(); ++k)
+                {
+                    if (nums[i] + nums[j] + nums[k] == target)
+                        re.push_back({ nums[i], nums[j], nums[k] });
+
+                }
+            }
+        }
+        return re;
+    }
+
+    vector<vector<int>> threesum(vector<int> &nums, int target)
+    {
+        if (nums.size() < 3)
+            return{};
+        vector<vector<int>> re;
+        sort(nums.begin(), nums.end());
+        int size(nums.size() - 1);
+        for (int i = 0; i + 2 < nums.size(); ++i)
+        {
+            int b(i + 1), e(size), ttarget(target - nums[i]);
+            while (b < e)
+            {
+                int tsum = nums[b] + nums[e];
+                if (tsum == ttarget)
+                {
+                    re.push_back({ nums[i], nums[b], nums[e] });
+                    while (b + 1 < e&&nums[b] == nums[b + 1])
+                        ++b;
+                    while (e - 1 > b&&nums[e] == nums[e - 1])
+                        --e;
+                    ++b;
+                    --e;
+
+                }
+                else if (tsum > ttarget)
+                    --e;
+                else
+                    ++b;
+            }
+            while (i + 1 < nums.size() && nums[i] == nums[i + 1])
+                ++i;
+        }
+        return re;
+
+    }
+   
+
+    vector<vector<int>> threeSumAC(vector<int>& nums) {
         vector<vector<int>> re;
         if (nums.size() < 3)
             return re;
@@ -64,10 +163,14 @@ private:
 int main()
 {
     Solution s;
-    vector<int> test = { -1, 0, 1, 2, -1, -4 , 7, -4, -3};
-    auto re = s.threeSum(test);
+    vector<int> test = { numeric_limits<int>::min() + 3, numeric_limits<int>::min() + 2, -2, 2, numeric_limits<int>::max()-1 };
+    auto re = s.threesum2(test, 3);
     for (auto r : re)
-        cout << r[0] << " " << r[1] << " " << r[2] << endl;
+        cout << r[0] << " " << r[1] << " "<<r[2]<< endl;
+    /*cout << numeric_limits<int>::max() + 1 << endl;
+    cout << numeric_limits<int>::min() - 1 << endl;
+    cout << (numeric_limits<int>::min() - (2147483645)) << endl;*/
+    cout<<
     system("pause");
     return 0;
 }
