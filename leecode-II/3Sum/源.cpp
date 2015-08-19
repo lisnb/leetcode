@@ -3,6 +3,8 @@
 #include <iostream>
 #include <limits>
 #include <vector>
+#include <hash_set>
+#include <functional>
 
 using namespace std;
 
@@ -170,7 +172,7 @@ int main()
     /*cout << numeric_limits<int>::max() + 1 << endl;
     cout << numeric_limits<int>::min() - 1 << endl;
     cout << (numeric_limits<int>::min() - (2147483645)) << endl;*/
-    cout<<
+    auto a = hash<int>() ;
     system("pause");
     return 0;
 }

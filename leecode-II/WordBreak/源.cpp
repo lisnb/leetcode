@@ -66,13 +66,50 @@ private:
 };
 
 
+
+
+class Solution2 {
+public:
+    bool wordBreak(string s, unordered_set<string>& wordDict) {
+        int maxsize(0), minsize(s.size());
+        for (auto word : wordDict)
+        {
+            maxsize = max(maxsize, (int)word.size());
+            minsize = min(minsize, (int)word.size());
+        }
+        vector<int> opt(s.size() + 1, 0);
+        opt[0] = 1;
+        string tmp("");
+        for (auto i = 0; i+minsize-1 < s.size(); ++i)
+        {
+            if (opt[i] == 1)
+            {
+                for (auto j = minsize; j <= maxsize && i+j<=s.size(); ++j)
+                {
+                    tmp = s.substr(i, j);
+                    if (wordDict.find(tmp) != wordDict.end())
+                        opt[i + j] = 1;
+                }
+            }
+        }
+        return opt.back() == 1;
+
+    }
+};
+
+
 int main()
 {
-    Solution s;
-    unordered_set<string> dict = { };
-    string test("a");//test("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab");
+    Solution2 s;
+    unordered_set<string> dict = { "a", "ab"};
+    string test("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab");
     auto re = s.wordBreak(test, dict);
     cout << re << endl;
     system("pause");
     return 0;
 }
+
+
+
+
+

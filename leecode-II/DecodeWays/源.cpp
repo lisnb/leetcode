@@ -48,7 +48,20 @@ private:
     }
 };
 
-
+class SOlution3{
+public:
+    int fibonacci(int n)
+    {
+        int c(0), c_1(1), c_2(0);
+        for (int i = 0; i < n; ++i)
+        {
+            c = c_1 + c_2;
+            c_2 = c_1;
+            c_1 = c;
+        }
+        return c;
+    }
+};
 
 
 class Solution2 {

@@ -40,9 +40,28 @@ public:
             return 0;
         if (t.size() == s.size())
             return t == s ? 1 : 0;
-        vector<int> cache(s.size(), 0);
-
-
+        vector<int> cache(s.size()+1, 0);
+        for (auto i = 1; i <= s.size(); ++i)
+            cache[i] = s[i - 1] == t[0] ? cache[i - 1] + 1 : cache[i - 1];
+        for (auto i = 1; i < t.size(); ++i)
+        {
+            int prev = 0;
+            for (int j = 0; j < s.size(); ++j)
+            {
+                if (t[i] == s[j])
+                {
+                    int tmp = cache[j+1];
+                    cache[j + 1] = cache[j] + prev;
+                    prev = tmp;
+                }
+                else
+                {
+                    prev = cache[j + 1];
+                    cache[j + 1] = cache[j];
+                }
+            }
+        }
+        return cache.back();
     }
 };
 
@@ -50,8 +69,8 @@ public:
 int main()
 {
     Solution so;
-    string s("rrabibbrb"), t("rb");
-    cout << so.numDistinct(s, t) << endl;
+    string s("abbbiit"), t("abbit");
+    cout << so.numDistinctk(s, t) << endl;
     system("pause");
     return 0;
 }

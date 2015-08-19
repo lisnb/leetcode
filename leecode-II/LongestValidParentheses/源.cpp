@@ -42,6 +42,43 @@ public:
     }
 };
 
+
+
+
+class Solution2 {
+public:
+    int longestValidParentheses(string s) {
+        if (s.size() <= 1)
+            return 0;
+        vector<int> stack;
+        int longest(0);
+        for (int i = 0; i < s.size(); ++i)
+        {
+            if (s[i] == '(')
+            {
+                stack.push_back(i + 1);
+            }
+            else
+            {
+                if (stack.empty()||stack.back()<0)
+                    stack.push_back(-1 * (i + 1));
+                else
+                {
+                    stack.pop_back();
+                    if (stack.empty())
+                        longest = i + 1;
+                    else
+                        longest = max(longest, i - abs(stack.back()) + 1);
+                }
+
+            }
+        }
+        return longest;
+    }
+};
+
+
+
 int main()
 {
     Solution s;

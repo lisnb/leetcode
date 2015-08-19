@@ -21,7 +21,27 @@ public:
                 triangle.at(level).at(i) += min(triangle.at(level + 1).at(i), triangle.at(level + 1).at(i + 1));
             }
         }
-        return triangle.front.front();
+        return triangle.front().front();
+    }
+    int minimumTotal2(vector<vector<int>>& triangle) {
+        if (triangle.empty())
+            return 0;
+
+        for (int i = triangle.size() - 2; i >= 0; --i)
+        {
+            for (int j = 0; j<triangle[i].size(); ++j)
+                triangle[i][j] += min(triangle[i + 1][j], triangle[i + 1][j + 1]);
+        }
+
+        return triangle.front().front();
     }
 };
 
+int main()
+{
+    Solution s;
+    vector<vector<int>> triangle = { { 1 }, { 2, 3 } };
+    cout << s.minimumTotal2(triangle) << endl;
+    system("pause");
+    return 0;
+}
