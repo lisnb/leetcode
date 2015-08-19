@@ -34,9 +34,32 @@ public:
 };
 
 
+class Solution2 {
+public:
+    int trap(vector<int>& height) {
+        if (height.size() <= 1)
+            return 0;
+        vector<int> lefts(height.size());
+        int leftmax(0); 
+        for (auto i = 0; i < height.size(); ++i)
+        {
+            leftmax = max(leftmax, height[i]);
+            lefts[i] = leftmax;
+        }
+
+        int water(0), rightmax(0);
+        for (int i = height.size() - 1; i >= 0; --i)
+        {
+            rightmax = max(rightmax, height[i]);
+            water += (min(rightmax, lefts[i]) - height[i]);
+        }
+        return water;
+    }
+};
+
 int main()
 {
-    Solution s;
+    Solution2 s;
     vector<int> test = { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 };
     cout << s.trap(test) << endl;
     system("pause");

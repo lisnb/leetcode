@@ -102,6 +102,23 @@ public:
         return maxa;
 
     }
+
+    int largest(vector<int> &height)
+    {
+        vector<int> stack;
+        vector<int> leftlargest(height.size(), 0);
+        for (auto i = 0; i < height.size(); ++i)
+        {
+            int tmp(i);
+            while (!stack.empty() && height.at(i) <= height.at(stack.back()))
+            {
+                tmp = leftlargest[height.back()];
+                stack.pop_back();
+            }
+            leftlargest[i] = tmp;
+            stack.push_back(i);
+        }
+    }
 };
 
 int main()
