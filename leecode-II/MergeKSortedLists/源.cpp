@@ -2,11 +2,46 @@
 #include <vector>
 #include "../leecode-II/leetcode.h"
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 
 
 typedef _leetcode_listnode<int> ListNode;
+
+
+class Solution2 {
+    struct cmp_greater_list
+    {
+        bool operator()(const ListNode *lh, const ListNode *rh) const
+        {
+            return lh->val > rh->val;
+        }
+    };
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        priority_queue<ListNode *, vector<ListNode *>, cmp_greater_list> minheap;
+        for (auto list : lists)
+        {
+            if (list != nullptr)
+                minheap.push(list);
+        }
+
+        ListNode *newhead = new ListNode(0);
+        auto thead(newhead);
+        while (!minheap.empty())
+        {
+            auto top = minheap.top();
+            minheap.pop();
+            thead->next = top;
+            thead = thead->next;
+            if (top->next != nullptr)
+                minheap.push(top->next);
+        }
+        return newhead->next;
+    }
+};
+
 
 
 class Solution {
@@ -72,7 +107,7 @@ private:
 
 int main()
 {
-    Solution s;
+    Solution2 s;
     vector<int> v1 = { 10 }, v2 = { 2, 4, 6, 7, 8 }, v3 = {6, 7, 8,9,10};
     auto l1 = lc_createlist(v1, true), l2 = lc_createlist(v2, true), l3 = lc_createlist(v3);
     vector<ListNode *> lists = { l1, l2};

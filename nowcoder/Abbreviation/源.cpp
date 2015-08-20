@@ -19,6 +19,7 @@ string abbreviation(string &ori)
         ss << ori[0] << ori.size() - 2 << ori.back();
         return ss.str();
     }
+    int_max
 }
 
 bool checkdup(vector<string> &dict, string word)

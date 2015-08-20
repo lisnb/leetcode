@@ -44,6 +44,20 @@ public:
         number *= negtive ? -1 : 1;
         return number > numeric_limits<int>::max() || number < numeric_limits<int>::min() ? 0 : number;
     }
+
+
+    int reverseInteger(int x)
+    {
+        int ret(0);
+        while (x > 0)
+        {
+            if (abs(ret) > 214748364)
+                return 0;
+            ret = ret * 10 + x % 10;
+            x /= 10;
+        }
+        return ret;
+    }
 };
 
 
